@@ -21,15 +21,8 @@ COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 # Install Composer directly
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install application dependencies
 RUN composer install
 
-# Expose port 80
 EXPOSE 80
 
-# Set ownership and permissions
-
-
-
-# Start Apache
 CMD ["apache2-foreground"]
