@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('FirstName');
             $table->string('LastName');
             $table->string('Email');
-            $table->integer('ContactNumber');
+            $table->string('ContactNumber');
             $table->softDeletes(); //Like Recycle Bin
             $table->timestamps();
         });
