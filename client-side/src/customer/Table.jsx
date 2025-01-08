@@ -8,6 +8,7 @@ import axios from 'axios';
 import axiosClient from '../api/axios';
 import { useReactTable, getCoreRowModel, ColumnDef, flexRender, getPaginationRowModel, SortingState, getSortedRowModel } from '@tanstack/react-table';
 import Swal from 'sweetalert2';
+import Pagination from './Pagination/Pagination';
 
 
 function Table() {
@@ -197,7 +198,7 @@ function Table() {
                 <div>
                   {header.column.columnDef.header}
                   {header.column.getCanSort() && (
-                    <span className="material-symbols-rounded cursor-pointer Sort-arrow" onClick={header.column.getToggleSortingHandler()}>
+                    <span style={{ cursor: 'pointer' }} className="material-symbols-rounded cursor-pointer Sort-arrow" onClick={header.column.getToggleSortingHandler()}>
                       {header.column.getIsSorted() === 'asc' ? 'expand_less' : 'expand_more'}
                     </span>
                   )}
@@ -219,7 +220,12 @@ function Table() {
         ))}
       </tbody>
     </table>
+    <div className='m-10 mt-0'>
+        <div className='separator my-2'></div>
+        <Pagination pagination={pagination} table={table} />
     </div>
+    </div>
+    
   );
 }
 
