@@ -79,8 +79,8 @@ function EditModal( { Added, rowValue, ...props }) {
         >
             {({ errors, touched, values }) => (
             <Form placeholder="">
-                <Modal.Header closeButton>
-                    <h3>Edit Customer</h3>
+                <Modal.Header closeButton className="bg-light border-0 text-center w-100"> 
+                    <h3 className='text-primary'>Edit Customer</h3>
                 </Modal.Header>
                 <Modal.Body className='bg-muted'>
                      {/* First Name Field */}

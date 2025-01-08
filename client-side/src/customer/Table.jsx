@@ -1,7 +1,8 @@
 import React from 'react';
-import './table.css'; // Import the CSS file
-import CreateModal from './Actions/CreateModal'; // Import the CreateModal component
-import EditModal from './Actions/EditModal'; // Import the EditModal component
+import './table.css';
+import CreateModal from './Actions/CreateModal'; 
+import EditModal from './Actions/EditModal'; 
+import ShowModal from './Actions/ShowModal'; 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import axiosClient from '../api/axios';
@@ -14,11 +15,10 @@ function Table() {
     const Laravel_URL = axiosClient.defaults.baseURL //It will changable on .env of client-side
     const [modalShow, setModalShow] = React.useState(false); //Modal Show/Hide of Add Customer
     const [editModalShow, setEditModalShow] = React.useState(false); //Modal Show/Hide of Edit Customer
+    const [viewModalShow, setViewModalShow] = React.useState(false); //Modal Show/Hide of View Customer
     const [customerData, setCustomerData] = useState([]); //Customers Data
     const [rowValue, setRowValue] = useState({}); //Row Value of Edit Customer 
-
-
-    console.log('test', Laravel_URL);
+    // console.log('test', Laravel_URL);
     useEffect(() => {
         axios.get(Laravel_URL+"/customer").then((res) => {
             console.log(res.data);
@@ -59,7 +59,12 @@ function Table() {
             enableSorting: false,
             cell: (info) => (
                 <div className='d-flex gap-2 justify-content-center'>
-                  <button className='btn btn-sm bg-primary d-flex justify-content-center align-items-center'  >
+                  <button className='btn btn-sm bg-primary d-flex justify-content-center align-items-center'  
+                    onClick={() => {
+                      setViewModalShow(true);
+                      setRowValue(info.row.original); //selected row value
+                    }}
+                  >
                   <span class="material-symbols-rounded text-white">
                     visibility
                   </span>
@@ -175,6 +180,13 @@ function Table() {
             Added={Added} //Passing the Added function to EditModal props
             rowValue={rowValue} //Passing the Row Value to EditModal props
         />
+
+           {/* Modal of View Customer */}
+           <ShowModal
+            show={viewModalShow}
+            onHide={() => setViewModalShow(false)}
+            rowValue={rowValue} //Passing the Row Value to EditModal props
+          />
        <table className="styled-table">
       <thead>
         {table.getHeaderGroups().map(headerGroup => (

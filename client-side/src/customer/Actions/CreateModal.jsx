@@ -81,7 +81,7 @@ function CreateModal({ Added, ...props }) {
           {({ values }) => (
             <Form>
               <Modal.Header closeButton>
-                <h3>Add Customer</h3>
+                <h3 className='text-primary'>Add Customer</h3>
               </Modal.Header>
               <Modal.Body className="bg-muted">
                 {/* First Name Field */}
