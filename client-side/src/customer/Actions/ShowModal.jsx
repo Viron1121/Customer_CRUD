@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import axiosClient from '../../api/axios';
 
 function ShowModal({rowValue, ...props}) {
   return (
