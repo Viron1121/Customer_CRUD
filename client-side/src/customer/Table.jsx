@@ -169,6 +169,7 @@ function Table() {
 
         {/* Modal of Add Customer */}
         <CreateModal
+            customerData={customerData}
             show={modalShow}
             onHide={() => setModalShow(false)}
             Added={Added} //Passing the Added function to CreateModal props
@@ -189,37 +190,48 @@ function Table() {
             rowValue={rowValue} //Passing the Row Value to EditModal props
           />
        <table className="styled-table">
-      <thead>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id} className="fw-bold fs-6 text-gray-800" style={{ backgroundColor: "#F5F8FA" }}>
-            {headerGroup.headers.map((header, index) => (
-              <th className={` text-center `} 
-                  key={header.id}>
-                <div>
-                  {header.column.columnDef.header}
-                  {header.column.getCanSort() && (
-                    <span style={{ cursor: 'pointer' }} className="material-symbols-rounded cursor-pointer Sort-arrow" onClick={header.column.getToggleSortingHandler()}>
-                      {header.column.getIsSorted() === 'asc' ? 'expand_less' : 'expand_more'}
-                    </span>
-                  )}
-                </div>
-              </th>
-            ))}
-          </tr>
+  <thead>
+    {table.getHeaderGroups().map(headerGroup => (
+      <tr key={headerGroup.id} className="fw-bold fs-6 text-gray-800" style={{ backgroundColor: "#F5F8FA" }}>
+        {headerGroup.headers.map(header => (
+          <th className="text-center" key={header.id}>
+            <div>
+              {header.column.columnDef.header}
+              {header.column.getCanSort() && (
+                <span
+                  style={{ cursor: 'pointer' }}
+                  className="material-symbols-rounded cursor-pointer Sort-arrow"
+                  onClick={header.column.getToggleSortingHandler()}
+                >
+                  {header.column.getIsSorted() === 'asc' ? 'expand_less' : 'expand_more'}
+                </span>
+              )}
+            </div>
+          </th>
         ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell, index) => (
-              <td key={cell.id} className={`p-3 align-content-center fs-6 fw-semibold text-center`}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+      </tr>
+    ))}
+  </thead>
+  <tbody>
+    {table.getRowModel().rows.length === 0 ? (
+      <tr>
+        <td colSpan={table.getVisibleFlatColumns().length} className="text-center ">
+          No available data
+        </td>
+      </tr>
+    ) : (
+      table.getRowModel().rows.map(row => (
+        <tr key={row.id}>
+          {row.getVisibleCells().map(cell => (
+            <td key={cell.id} className="p-3 align-content-center fs-6 fw-semibold text-center">
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            </td>
+          ))}
+        </tr>
+      ))
+    )}
+  </tbody>
+</table>
     <div className='m-10 mt-0'>
         <div className='separator my-2'></div>
         <Pagination pagination={pagination} table={table} />

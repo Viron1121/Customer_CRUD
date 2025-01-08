@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Modal, Button } from 'react-bootstrap';
 import axiosClient from '../../api/axios';
 
-function CreateModal({ Added, ...props }) {
+function CreateModal({ customerData, Added, ...props }) {
   return (
     <>
       <Modal  
@@ -20,17 +20,29 @@ function CreateModal({ Added, ...props }) {
             FirstName: '',  
             LastName: '',
             Email: '',
-            ContactNumber: 0,
+            ContactNumber: '',
           }}
           validationSchema={Yup.object({
             FirstName: Yup.string().required('Required'),
             LastName: Yup.string().required('Required'),
-            Email: Yup.string().email('Invalid email address').required('Required'),
-            ContactNumber: Yup.number().required('Required'),
+            Email: Yup.string()
+              .email('Invalid email address')
+              .required('Required')
+              .test('unique-email', 'Email already exists', function (value) {
+                if (!value) return true; 
+                return !customerData.some(customer => customer.Email === value);
+              }),
+            ContactNumber: Yup.string()
+              .matches(/^\d+$/, 'Contact number must be numeric')
+              .required('Required')
+              .test('unique-contact', 'Contact number already exists', function (value) {
+                if (!value) return true; 
+                return !customerData.some(customer => customer.ContactNumber === value);
+              }),
           })}
           onSubmit={async (values, { resetForm }) => {
             Swal.fire({
-                title: 'Are you sure you want to procced?',
+                title: 'Are you sure you want to proceed?',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'No, Cancel',
@@ -72,7 +84,6 @@ function CreateModal({ Added, ...props }) {
                                 allowOutsideClick: false
                             });
                         }
-
                     }
                 }
             });
@@ -108,7 +119,7 @@ function CreateModal({ Added, ...props }) {
                 {/* Contact Number Field */}
                 <div className="mb-3">
                   <label htmlFor="contactNumber" className="form-label">Contact Number</label>
-                  <Field type="number" name="ContactNumber" className="form-control" />
+                  <Field type="text" name="ContactNumber" className="form-control" />
                   <ErrorMessage name="ContactNumber" component="div" className="text-danger" />
                 </div>
               </Modal.Body>
