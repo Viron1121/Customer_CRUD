@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore, MdOutlineSkipNext, MdOutlineSkipPrevious } from "react-icons/md";
 
-//Viron Love Iza
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Pagination({ table }) {
   const [currentPage, setCurrentPage] = useState(table.getState().pagination.pageIndex);
 
