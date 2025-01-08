@@ -4,16 +4,24 @@ This is the updated Version of my project
 
 1. Open the terminal, navigate to the backend directory, and run the following command:
 "docker compose up -d" 
-to run it on container Make sure you have docker already installed on your computer if not you can download it here https://www.docker.com/
+Make sure that you have a docker installed on your computer. If you don’t have it yet, you can download it through this link : 
+https://www.docker.com/
 
-Make sure to migrate before proceeding to step number 2 "docker compose exec app php artisan migrate"
+Before proceeding to the next step, make sure to run the migration to set up the customer table then proceed to run the following command: 
+"docker compose exec app php artisan migrate"
 
-2. to run the react client side go to client-side folder then install npm packages by using "npm install"
-    to start it just "npm start"
-    you can access it on "http://localhost:3000/"
+2. To run the react frontend, go to client-side folder install the necessary npm packages by running the following command: 
+"npm install"
+    Launch the React application using the command: "npm start"
+    Once the application is running, you can access it in your web browser at: "http://localhost:3000/"
 
 
-    if you wanna test it on local environment In the backend/.env file, make sure the database settings match your local database configuration. For example:
+    To test it in a local environment, follow these steps to configure your database settings: 
+    -Open the .env File
+    -Navigate to the backend directory.
+    -Open the .env file in a text editor of your choice.
+    
+    Make sure the database settings match your local database configuration. For example:
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
