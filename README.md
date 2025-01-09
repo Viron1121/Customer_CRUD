@@ -10,6 +10,8 @@ https://www.docker.com. open the application then proceed to the steps.
 
 Create a .env file on backend directory and copy the content from .env.example to the newly created .env file.
 
+The PHP version used is 8.1. You can change it in the Dockerfile to match the PHP version you are using.
+
 "docker compose up -d" this is to run the backend thru docker compose.
 close then open your code editor to apply the changes if error persist
 
