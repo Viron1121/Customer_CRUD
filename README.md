@@ -2,13 +2,16 @@
 
 This is the updated Version of my project
 
+Make sure you have Docker installed on your computer. If you don’t have it yet, you can download it from this link: 
+https://www.docker.com. open the application then proceed to the steps. 
+
 1. Open the terminal, navigate to the backend directory, and run the following command:
-"composer install" - delete composer.lock if error persist or "composer install --no-scripts"
-"docker compose up -d" this is to run the backend thru docker compose
+"composer install" - delete composer.lock if error persist then "composer install --no-scripts"
 
-Create a .env file and copy the content from .env.example to the newly created .env file.
+Create a .env file on backend directory and copy the content from .env.example to the newly created .env file.
 
-Make sure you have Docker installed on your computer. If you don’t have it yet, you can download it from this link: https://www.docker.com. If you still encounter errors after installing Docker, open Docker, then restart your code editor to apply the changes.
+"docker compose up -d" this is to run the backend thru docker compose.
+close then open your code editor to apply the changes if error persist
 
 Before proceeding to the next step, make sure to run the migration to set up the customer table then proceed to run the following command: 
 "docker compose exec app php artisan migrate"
